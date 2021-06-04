@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:uber_flutter/brand_colors.dart';
 import 'package:uber_flutter/screens/registration_page.dart';
+import 'package:uber_flutter/widgets/taxi_button.dart';
 
 class LoginPage extends StatelessWidget {
   static const String id = "login";
@@ -77,25 +78,10 @@ class LoginPage extends StatelessWidget {
                     SizedBox(
                       height: 40,
                     ),
-                    RaisedButton(
-                      onPressed: () {},
+                    TaxiButtton(
+                      title: "LOGIN",
                       color: BrandColors.colorGreen,
-                      textColor: Colors.white,
-                      shape: new RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(25),
-                      ),
-                      child: Container(
-                        height: 50.0,
-                        child: Center(
-                          child: Text(
-                            "LOGIN",
-                            style: TextStyle(
-                              fontSize: 18.0,
-                              fontFamily: 'Brand-Bold',
-                            ),
-                          ),
-                        ),
-                      ),
+                      onPressed: () {},
                     ),
                   ],
                 ),
