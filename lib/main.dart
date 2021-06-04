@@ -2,6 +2,7 @@
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:uber_flutter/screens/loginpage.dart';
 import 'package:uber_flutter/screens/mainpage.dart';
 
 Future<void> main() async {
@@ -17,22 +18,19 @@ Future<void> main() async {
     ),
   );
 
-  runApp(MaterialApp(
-    title: 'Flutter Database Example',
-    home: MainPage(),
-  ));
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Flutter Database Example',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         fontFamily: 'Brand-Regular',
       ),
-      home: MainPage(),
+      home: LoginPage(),
     );
   }
 }
