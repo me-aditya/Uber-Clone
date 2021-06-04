@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:uber_flutter/screens/loginpage.dart';
 import 'package:uber_flutter/screens/mainpage.dart';
+import 'package:uber_flutter/screens/registration_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         fontFamily: 'Brand-Regular',
       ),
-      home: LoginPage(),
+      home: RegistrationPage(),
     );
   }
 }
