@@ -1,8 +1,26 @@
+import 'dart:io';
+
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:uber_flutter/screens/mainpage.dart';
 
-void main() {
-  runApp(MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final FirebaseApp app = await Firebase.initializeApp(
+    options: const FirebaseOptions(
+      appId: "1:781725035719:android:12ccb67fadf23aa613a2e2",
+      messagingSenderId:
+          "781725035719-9kjqlnb44jp798e7f4vk642tled953o0.apps.googleusercontent.com",
+      databaseURL: "https://uber-clone-74ae7-default-rtdb.firebaseio.com",
+      apiKey: "AIzaSyCdEPScUYGrLyrWem8LCY9XHvdVbHO0H80",
+      projectId: "uber-clone-74ae7",
+    ),
+  );
+
+  runApp(MaterialApp(
+    title: 'Flutter Database Example',
+    home: MainPage(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -17,4 +35,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
