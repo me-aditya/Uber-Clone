@@ -26,12 +26,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Database Example',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        fontFamily: 'Brand-Regular',
-      ),
-      home: RegistrationPage(),
-    );
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+          fontFamily: 'Brand-Regular',
+        ),
+        initialRoute: RegistrationPage.id,
+        routes: {
+          RegistrationPage.id: (context) => RegistrationPage(),
+          MainPage.id: (context) => MainPage(),
+          LoginPage.id: (context) => LoginPage(),
+        });
   }
 }
