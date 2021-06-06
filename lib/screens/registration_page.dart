@@ -7,12 +7,48 @@ import 'package:uber_flutter/widgets/taxi_button.dart';
 class RegistrationPage extends StatelessWidget {
   static const String id = "register";
 
+  final GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
+
+  void showSnackbar(String message) {
+    final snackbar = SnackBar(
+      content: Text(
+        message,
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          fontSize: 15.0,
+        ),
+      ),
+    );
+
+    scaffoldKey.currentState.showSnackBar(snackbar);
+
+    
+  }
+
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   var fullNameController = TextEditingController();
   var phoneController = TextEditingController();
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
+
+  void registerUser() async {
+    try {
+      UserCredential userCredential =
+          await _auth.createUserWithEmailAndPassword(
+        email: emailController.text,
+        password: passwordController.text,
+      );
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        print('The password provided is too weak.');
+      } else if (e.code == 'email-already-in-use') {
+        print('The account already exists for that email.');
+      }
+    } catch (e) {
+      print("Hi this line $e");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -131,25 +167,8 @@ class RegistrationPage extends StatelessWidget {
                     TaxiButtton(
                       title: "REGISTER",
                       color: BrandColors.colorGreen,
-                      onPressed: () async {
-                        try {
-                          UserCredential userCredential = await FirebaseAuth
-                              .instance
-                              .signInWithEmailAndPassword(
-                            email: emailController.text,
-                            password: passwordController.text,
-                          );
-
-                          Navigator.pushNamed(context, LoginPage.id);
-                        } on FirebaseAuthException catch (e) {
-                          if (e.code == 'weak-password') {
-                            print('The password provided is too weak.');
-                          } else if (e.code == 'email-already-in-use') {
-                            print('The account already exists for that email.');
-                          }
-                        } catch (e) {
-                          print("Hi this line $e");
-                        }
+                      onPressed: () {
+                        if (fullNameController.text.length < 3) registerUser();
                       },
                     ),
                   ],
