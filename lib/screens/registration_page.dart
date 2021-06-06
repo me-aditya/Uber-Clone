@@ -21,8 +21,6 @@ class RegistrationPage extends StatelessWidget {
     );
 
     scaffoldKey.currentState.showSnackBar(snackbar);
-
-    
   }
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -53,6 +51,7 @@ class RegistrationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: scaffoldKey,
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Padding(
@@ -168,7 +167,27 @@ class RegistrationPage extends StatelessWidget {
                       title: "REGISTER",
                       color: BrandColors.colorGreen,
                       onPressed: () {
-                        if (fullNameController.text.length < 3) registerUser();
+                        if (fullNameController.text.length < 3) {
+                          showSnackbar("Please provide a valid full name.");
+                          return;
+                        }
+
+                        if (phoneController.text.length < 10) {
+                          showSnackbar("Please provide a valid phone number.");
+                          return;
+                        }
+
+                        if (!emailController.text.contains('@')) {
+                          showSnackbar("Please provide a valid email address.");
+                          return;
+                        }
+
+                        if (phoneController.text.length < 10) {
+                          showSnackbar("Password must be atleast 8 digits.");
+                          return;
+                        }
+
+                        registerUser();
                       },
                     ),
                   ],
