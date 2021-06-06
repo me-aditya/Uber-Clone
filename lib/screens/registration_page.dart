@@ -1,12 +1,19 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:uber_flutter/brand_colors.dart';
 import 'package:uber_flutter/screens/loginpage.dart';
+import 'package:uber_flutter/screens/mainpage.dart';
 import 'package:uber_flutter/widgets/taxi_button.dart';
 
-class RegistrationPage extends StatelessWidget {
+class RegistrationPage extends StatefulWidget {
   static const String id = "register";
 
+  @override
+  _RegistrationPageState createState() => _RegistrationPageState();
+}
+
+class _RegistrationPageState extends State<RegistrationPage> {
   final GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
 
   void showSnackbar(String message) {
@@ -26,8 +33,11 @@ class RegistrationPage extends StatelessWidget {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   var fullNameController = TextEditingController();
+
   var phoneController = TextEditingController();
+
   var emailController = TextEditingController();
+
   var passwordController = TextEditingController();
 
   void registerUser() async {
@@ -37,6 +47,23 @@ class RegistrationPage extends StatelessWidget {
         email: emailController.text,
         password: passwordController.text,
       );
+
+      DatabaseReference newUserRef = FirebaseDatabase.instance
+          .reference()
+          .child('users/${userCredential.user.uid}');
+
+      Map userMap = {
+        "fullName": fullNameController.text,
+        "email": emailController.text,
+        "password": passwordController.text,
+        "phoneNumber": phoneController.text,
+      };
+
+      newUserRef.set(userMap); // don't use push
+
+      Navigator.pushNamedAndRemoveUntil(context, MainPage.id, (route) => false);
+
+      //just a comment to put space between code.
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');
