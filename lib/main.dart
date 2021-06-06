@@ -9,8 +9,15 @@ import 'package:uber_flutter/screens/registration_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  await FirebaseAuth.instance.useEmulator('http://localhost:9099');
+  final FirebaseApp app = await Firebase.initializeApp(
+    options: const FirebaseOptions(
+      appId: "1:781725035719:android:12ccb67fadf23aa613a2e2",
+      messagingSenderId: "781725035719",
+      databaseURL: "https://uber-clone-74ae7-default-rtdb.firebaseio.com",
+      apiKey: "AIzaSyCdEPScUYGrLyrWem8LCY9XHvdVbHO0H80",
+      projectId: "uber-clone-74ae7",
+    ),
+  );
   runApp(MyApp());
 }
 
