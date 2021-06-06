@@ -10,7 +10,7 @@ class TaxiButtton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RaisedButton(
-      onPressed: () {},
+      onPressed: onPressed,
       color: color,
       textColor: Colors.white,
       shape: new RoundedRectangleBorder(

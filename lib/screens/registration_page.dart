@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:uber_flutter/brand_colors.dart';
 import 'package:uber_flutter/screens/loginpage.dart';
@@ -5,6 +6,13 @@ import 'package:uber_flutter/widgets/taxi_button.dart';
 
 class RegistrationPage extends StatelessWidget {
   static const String id = "register";
+
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  var fullNameController = TextEditingController();
+  var phoneController = TextEditingController();
+  var emailController = TextEditingController();
+  var passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +49,7 @@ class RegistrationPage extends StatelessWidget {
                 child: Column(
                   children: <Widget>[
                     TextField(
+                      controller: fullNameController,
                       keyboardType: TextInputType.name,
                       decoration: InputDecoration(
                         labelText: 'Full Name',
@@ -60,6 +69,7 @@ class RegistrationPage extends StatelessWidget {
                       height: 10,
                     ),
                     TextField(
+                      controller: emailController,
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
                         labelText: 'Email Address',
@@ -79,6 +89,7 @@ class RegistrationPage extends StatelessWidget {
                       height: 10,
                     ),
                     TextField(
+                      controller: phoneController,
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
                         labelText: 'Phone Number',
@@ -98,6 +109,7 @@ class RegistrationPage extends StatelessWidget {
                       height: 10,
                     ),
                     TextField(
+                      controller: passwordController,
                       obscureText: true,
                       decoration: InputDecoration(
                         labelText: 'Password',
@@ -119,7 +131,26 @@ class RegistrationPage extends StatelessWidget {
                     TaxiButtton(
                       title: "REGISTER",
                       color: BrandColors.colorGreen,
-                      onPressed: () {},
+                      onPressed: () async {
+                        try {
+                          UserCredential userCredential = await FirebaseAuth
+                              .instance
+                              .signInWithEmailAndPassword(
+                            email: emailController.text,
+                            password: passwordController.text,
+                          );
+
+                          Navigator.pushNamed(context, LoginPage.id);
+                        } on FirebaseAuthException catch (e) {
+                          if (e.code == 'weak-password') {
+                            print('The password provided is too weak.');
+                          } else if (e.code == 'email-already-in-use') {
+                            print('The account already exists for that email.');
+                          }
+                        } catch (e) {
+                          print("Hi this line $e");
+                        }
+                      },
                     ),
                   ],
                 ),
