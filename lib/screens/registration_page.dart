@@ -219,7 +219,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           return;
                         }
 
-                        if (phoneController.text.length < 10) {
+                        if (passwordController.text.length < 10) {
                           showSnackbar("Password must be atleast 8 digits.");
                           return;
                         }
