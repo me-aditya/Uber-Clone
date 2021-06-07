@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           fontFamily: 'Brand-Regular',
         ),
-        initialRoute: RegistrationPage.id,
+        initialRoute: MainPage.id,
         routes: {
           RegistrationPage.id: (context) => RegistrationPage(),
           MainPage.id: (context) => MainPage(),
