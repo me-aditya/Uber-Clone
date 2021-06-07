@@ -5,6 +5,7 @@ import 'package:uber_flutter/brand_colors.dart';
 import 'package:uber_flutter/screens/loginpage.dart';
 import 'package:uber_flutter/screens/mainpage.dart';
 import 'package:uber_flutter/widgets/taxi_button.dart';
+import 'package:connectivity/connectivity.dart';
 
 class RegistrationPage extends StatefulWidget {
   static const String id = "register";
@@ -193,7 +194,16 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     TaxiButtton(
                       title: "REGISTER",
                       color: BrandColors.colorGreen,
-                      onPressed: () {
+                      onPressed: () async {
+                        var connectivityResult =
+                            await Connectivity().checkConnectivity();
+
+                        if (connectivityResult != ConnectivityResult.mobile &&
+                            connectivityResult != ConnectivityResult.wifi) {
+                          showSnackbar("Check network connection.");
+                          return;
+                        }
+
                         if (fullNameController.text.length < 3) {
                           showSnackbar("Please provide a valid full name.");
                           return;
