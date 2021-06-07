@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:uber_flutter/brand_colors.dart';
 import 'package:uber_flutter/screens/loginpage.dart';
 import 'package:uber_flutter/screens/mainpage.dart';
+import 'package:uber_flutter/widgets/progress_dialog.dart';
 import 'package:uber_flutter/widgets/taxi_button.dart';
 import 'package:connectivity/connectivity.dart';
 
@@ -42,12 +43,21 @@ class _RegistrationPageState extends State<RegistrationPage> {
   var passwordController = TextEditingController();
 
   void registerUser() async {
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (BuildContext context) =>
+          ProgressDialog(status: 'Registering...'),
+    );
+
     try {
       UserCredential userCredential =
           await _auth.createUserWithEmailAndPassword(
         email: emailController.text,
         password: passwordController.text,
       );
+
+      Navigator.pop(context);
 
       DatabaseReference newUserRef = FirebaseDatabase.instance
           .reference()
@@ -61,7 +71,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
       };
 
       newUserRef.set(userMap); // don't use push
-
+      
       Navigator.pushNamedAndRemoveUntil(context, MainPage.id, (route) => false);
 
       //just a comment to put space between code.
@@ -72,7 +82,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
         print('The account already exists for that email.');
       }
     } catch (e) {
-      print("Hi this line $e");
+      Navigator.pop(context);
+
+      print("Hi error in this line $e");
     }
   }
 

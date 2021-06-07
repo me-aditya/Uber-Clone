@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:uber_flutter/brand_colors.dart';
 import 'package:uber_flutter/screens/mainpage.dart';
 import 'package:uber_flutter/screens/registration_page.dart';
+import 'package:uber_flutter/widgets/progress_dialog.dart';
 import 'package:uber_flutter/widgets/taxi_button.dart';
 import 'package:connectivity/connectivity.dart';
 
@@ -38,12 +39,18 @@ class _LoginPageState extends State<LoginPage> {
   var passwordController = TextEditingController();
 
   void loginrUser() async {
+    showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (BuildContext context) =>
+            ProgressDialog(status: 'Logging you in..'));
+
     try {
       UserCredential userCredential = await _auth.signInWithEmailAndPassword(
         email: emailController.text,
         password: passwordController.text,
       );
-
+      Navigator.pop(context);
       DatabaseReference userRef = FirebaseDatabase.instance
           .reference()
           .child('users/${userCredential.user.uid}');
@@ -63,13 +70,15 @@ class _LoginPageState extends State<LoginPage> {
         print('The account already exists for that email.');
       }
     } catch (e) {
-      print("Hi this line $e");
+      Navigator.pop(context);
+      print("Hi error in this line $e");
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: scaffoldKey,
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Padding(
