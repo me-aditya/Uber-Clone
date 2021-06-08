@@ -4,6 +4,8 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:uber_flutter/brand_colors.dart';
+import 'package:outline_material_icons/outline_material_icons.dart';
+import 'package:uber_flutter/widgets/brand_divider.dart';
 
 class MainPage extends StatefulWidget {
   static const String id = "mainpage";
@@ -119,11 +121,54 @@ class _MainPageState extends State<MainPage> {
                     Row(
                       children: <Widget>[
                         Icon(
-                          Icons.home,
+                          OMIcons.home,
                           color: BrandColors.colorDimText,
                         ),
+                        SizedBox(width: 12.0),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text("Add Home"),
+                            SizedBox(height: 3),
+                            Text(
+                              "Your residential address",
+                              style: TextStyle(
+                                fontSize: 11,
+                                color: BrandColors.colorDimText,
+                              ),
+                            ),
+                          ],
+                        )
                       ],
-                    )
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    BrandDivider(),
+                    SizedBox(height: 16.0),
+                    Row(
+                      children: <Widget>[
+                        Icon(
+                          OMIcons.work,
+                          color: BrandColors.colorDimText,
+                        ),
+                        SizedBox(width: 12.0),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text("Add Work"),
+                            SizedBox(height: 3),
+                            Text(
+                              "Your office address",
+                              style: TextStyle(
+                                fontSize: 11,
+                                color: BrandColors.colorDimText,
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
                   ],
                 ),
               ),
