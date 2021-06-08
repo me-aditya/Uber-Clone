@@ -16,6 +16,7 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
   Completer<GoogleMapController> _controller = Completer();
   GoogleMapController mapController;
   double mapPaddingBottom = 0;
@@ -28,6 +29,7 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: scaffoldKey,
       drawer: Container(
         width: 250,
         color: Colors.white,
@@ -130,25 +132,28 @@ class _MainPageState extends State<MainPage> {
           Positioned(
             top: 44,
             left: 20,
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(20),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black26,
-                    offset: Offset(0.7, 0.7),
-                    blurRadius: 5.0,
-                    spreadRadius: 0.5,
-                  )
-                ],
-              ),
-              child: CircleAvatar(
-                backgroundColor: Colors.white,
-                radius: 20,
-                child: Icon(
-                  Icons.menu,
-                  color: Colors.black87,
+            child: GestureDetector(
+              onTap: () {},
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black26,
+                      offset: Offset(0.7, 0.7),
+                      blurRadius: 5.0,
+                      spreadRadius: 0.5,
+                    )
+                  ],
+                ),
+                child: CircleAvatar(
+                  backgroundColor: Colors.white,
+                  radius: 20,
+                  child: Icon(
+                    Icons.menu,
+                    color: Colors.black87,
+                  ),
                 ),
               ),
             ),
