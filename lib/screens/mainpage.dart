@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:uber_flutter/brand_colors.dart';
 
 class MainPage extends StatefulWidget {
   static const String id = "mainpage";
@@ -39,7 +40,7 @@ class _MainPageState extends State<MainPage> {
             left: 0,
             right: 0,
             child: Container(
-              height: 240,
+              height: 300,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
@@ -112,6 +113,17 @@ class _MainPageState extends State<MainPage> {
                         ),
                       ),
                     ),
+                    SizedBox(
+                      height: 22,
+                    ),
+                    Row(
+                      children: <Widget>[
+                        Icon(
+                          Icons.home,
+                          color: BrandColors.colorDimText,
+                        ),
+                      ],
+                    )
                   ],
                 ),
               ),
