@@ -7,6 +7,7 @@ import 'package:uber_flutter/brand_colors.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:uber_flutter/styles/styles.dart';
 import 'package:uber_flutter/widgets/brand_divider.dart';
+import 'package:geolocator/geolocator.dart';
 
 class MainPage extends StatefulWidget {
   static const String id = "mainpage";
@@ -20,6 +21,21 @@ class _MainPageState extends State<MainPage> {
   Completer<GoogleMapController> _controller = Completer();
   GoogleMapController mapController;
   double mapPaddingBottom = 0;
+  var geolocator = Geolocator();
+
+  Position currentPosition;
+
+  void setupPositionLocator() async {
+    Position position = await Geolocator.getCurrentPosition(
+      desiredAccuracy: LocationAccuracy.bestForNavigation,
+    );
+
+    currentPosition = position;
+
+    LatLng pos = LatLng(position.latitude, position.longitude);
+    CameraPosition cp = new CameraPosition(target: pos, zoom: 14);
+    mapController.animateCamera(CameraUpdate.newCameraPosition(cp));
+  }
 
   static final CameraPosition _kGooglePlex = CameraPosition(
     target: LatLng(37.42796133580664, -122.085749655962),
