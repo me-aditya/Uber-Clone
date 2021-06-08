@@ -143,6 +143,8 @@ class _MainPageState extends State<MainPage> {
               setState(() {
                 mapPaddingBottom = 280;
               });
+
+              setupPositionLocator();
             },
           ),
           Positioned(
