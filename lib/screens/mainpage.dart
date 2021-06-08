@@ -27,7 +27,52 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
+      drawer: Container(
+        width: 250,
+        color: Colors.white,
+        child: Drawer(
+          child: ListView(
+            padding: EdgeInsets.all(0),
+            children: <Widget>[
+              Container(
+                height: 160,
+                child: DrawerHeader(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                  ),
+                  child: Row(
+                    children: <Widget>[
+                      Image.asset(
+                        'images/user_icon.png',
+                        height: 60,
+                        width: 60,
+                      ),
+                      SizedBox(
+                        width: 15,
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            "Aditya Rathi",
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontFamily: 'Brand-Bold',
+                            ),
+                          ),
+                          SizedBox(height: 5),
+                          Text("View Profile"),
+                          BrandDivider(),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
       body: Stack(
         children: <Widget>[
           GoogleMap(
