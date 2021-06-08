@@ -239,7 +239,7 @@ class _MainPageState extends State<MainPage> {
                     Row(
                       children: <Widget>[
                         Icon(
-                          OMIcons.work,
+                          OMIcons.workOutline,
                           color: BrandColors.colorDimText,
                         ),
                         SizedBox(width: 12.0),
