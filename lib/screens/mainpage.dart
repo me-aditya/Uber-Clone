@@ -133,7 +133,9 @@ class _MainPageState extends State<MainPage> {
             top: 44,
             left: 20,
             child: GestureDetector(
-              onTap: () {},
+              onTap: () {
+                scaffoldKey.currentState.openDrawer();
+              },
               child: Container(
                 decoration: BoxDecoration(
                   color: Colors.white,
