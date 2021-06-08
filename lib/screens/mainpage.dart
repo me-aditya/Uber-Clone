@@ -135,7 +135,10 @@ class _MainPageState extends State<MainPage> {
             padding: EdgeInsets.only(bottom: mapPaddingBottom),
             mapType: MapType.normal,
             myLocationButtonEnabled: true,
+            zoomControlsEnabled: true,
+            zoomGesturesEnabled: true,
             initialCameraPosition: _kGooglePlex,
+            myLocationEnabled: true,
             onMapCreated: (GoogleMapController controller) {
               _controller.complete(controller);
               mapController = controller;
