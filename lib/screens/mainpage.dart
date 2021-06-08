@@ -128,6 +128,32 @@ class _MainPageState extends State<MainPage> {
             },
           ),
           Positioned(
+            top: 44,
+            left: 20,
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black26,
+                    offset: Offset(0.7, 0.7),
+                    blurRadius: 5.0,
+                    spreadRadius: 0.5,
+                  )
+                ],
+              ),
+              child: CircleAvatar(
+                backgroundColor: Colors.white,
+                radius: 20,
+                child: Icon(
+                  Icons.menu,
+                  color: Colors.black87,
+                ),
+              ),
+            ),
+          ),
+          Positioned(
             bottom: 0,
             left: 0,
             right: 0,
