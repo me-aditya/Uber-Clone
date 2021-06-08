@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:uber_flutter/brand_colors.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
+import 'package:uber_flutter/styles/styles.dart';
 import 'package:uber_flutter/widgets/brand_divider.dart';
 
 class MainPage extends StatefulWidget {
@@ -35,6 +36,7 @@ class _MainPageState extends State<MainPage> {
             padding: EdgeInsets.all(0),
             children: <Widget>[
               Container(
+                color: Colors.white,
                 height: 160,
                 child: DrawerHeader(
                   decoration: BoxDecoration(
@@ -62,11 +64,47 @@ class _MainPageState extends State<MainPage> {
                           ),
                           SizedBox(height: 5),
                           Text("View Profile"),
-                          BrandDivider(),
                         ],
                       ),
                     ],
                   ),
+                ),
+              ),
+              BrandDivider(),
+              SizedBox(height: 10),
+              ListTile(
+                leading: Icon(OMIcons.cardGiftcard),
+                title: Text(
+                  "Free Rides",
+                  style: kDrawerItemStyle,
+                ),
+              ),
+              ListTile(
+                leading: Icon(OMIcons.creditCard),
+                title: Text(
+                  "Payments",
+                  style: kDrawerItemStyle,
+                ),
+              ),
+              ListTile(
+                leading: Icon(OMIcons.history),
+                title: Text(
+                  "Ride History",
+                  style: kDrawerItemStyle,
+                ),
+              ),
+              ListTile(
+                leading: Icon(OMIcons.contactSupport),
+                title: Text(
+                  "Support",
+                  style: kDrawerItemStyle,
+                ),
+              ),
+              ListTile(
+                leading: Icon(OMIcons.info),
+                title: Text(
+                  "About",
+                  style: kDrawerItemStyle,
                 ),
               ),
             ],
