@@ -17,6 +17,7 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   Completer<GoogleMapController> _controller = Completer();
   GoogleMapController mapController;
+  double mapPaddingBottom = 0;
 
   static final CameraPosition _kGooglePlex = CameraPosition(
     target: LatLng(37.42796133580664, -122.085749655962),
@@ -26,15 +27,21 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
       body: Stack(
         children: <Widget>[
           GoogleMap(
+            padding: EdgeInsets.only(bottom: mapPaddingBottom),
             mapType: MapType.normal,
             myLocationButtonEnabled: true,
             initialCameraPosition: _kGooglePlex,
             onMapCreated: (GoogleMapController controller) {
               _controller.complete(controller);
               mapController = controller;
+
+              setState(() {
+                mapPaddingBottom = 280;
+              });
             },
           ),
           Positioned(
@@ -42,7 +49,7 @@ class _MainPageState extends State<MainPage> {
             left: 0,
             right: 0,
             child: Container(
-              height: 300,
+              height: 270,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
