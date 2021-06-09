@@ -3,8 +3,10 @@ import 'dart:async';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:uber_flutter/brand_colors.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
+import 'package:uber_flutter/datamodels/app_data.dart';
 import 'package:uber_flutter/helpers/helper_methods.dart';
 import 'package:uber_flutter/styles/styles.dart';
 import 'package:uber_flutter/widgets/brand_divider.dart';
@@ -39,7 +41,8 @@ class _MainPageState extends State<MainPage> {
 
     print("Address-----------------1");
 
-    String address = await HelperMethods.findCordinateAddress(position);
+    String address =
+        await HelperMethods.findCordinateAddress(position, context);
     print(address);
 
     print("Address-----------------2");
@@ -280,6 +283,14 @@ class _MainPageState extends State<MainPage> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
+                            // Text((Provider.of<AppData>(context)
+                            //             .pickupAddress
+                            //             .placeName) !=
+                            //         null
+                            //     ? Provider.of<AppData>(context)
+                            //         .pickupAddress
+                            //         .placeName
+                            //     : 'Add Home'),
                             Text("Add Home"),
                             SizedBox(height: 3),
                             Text(

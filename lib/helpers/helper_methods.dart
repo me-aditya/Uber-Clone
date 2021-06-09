@@ -1,11 +1,12 @@
 import 'package:connectivity/connectivity.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:uber_flutter/datamodels/address.dart';
+import 'package:uber_flutter/datamodels/app_data.dart';
 import 'package:uber_flutter/helpers/request_helper.dart';
 import 'package:provider/provider.dart';
 
 class HelperMethods {
-  static Future<String> findCordinateAddress(Position position) async {
+  static Future<String> findCordinateAddress(Position position, context) async {
     String placeAddress = "";
     var connectivityResult = await Connectivity().checkConnectivity();
 
@@ -25,11 +26,15 @@ class HelperMethods {
       placeAddress = response['results'][0]['formatted_address'];
 
       Address pickupAddress = new Address();
-      
+
       pickupAddress.latitude = position.latitude;
       pickupAddress.longitude = position.longitude;
       pickupAddress.placeName = placeAddress;
-      
+
+      Provider.of<AppData>(
+        context,
+        listen: false,
+      ).updatePickupAddress(pickupAddress);
     }
 
     return placeAddress;
