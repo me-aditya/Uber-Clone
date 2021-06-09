@@ -17,6 +17,8 @@ class HelperMethods {
 
     var response = await RequestHelper.getRequest(url);
 
+    print(response.body);
+
     if (response != 'Failed!') {
       placeAddress = response['results'][0]['formatted_address'];
     }
