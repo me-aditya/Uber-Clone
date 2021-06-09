@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:uber_flutter/brand_colors.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
+import 'package:uber_flutter/helpers/helper_methods.dart';
 import 'package:uber_flutter/styles/styles.dart';
 import 'package:uber_flutter/widgets/brand_divider.dart';
 import 'package:geolocator/geolocator.dart';
@@ -35,6 +36,13 @@ class _MainPageState extends State<MainPage> {
     LatLng pos = LatLng(position.latitude, position.longitude);
     CameraPosition cp = new CameraPosition(target: pos, zoom: 14);
     mapController.animateCamera(CameraUpdate.newCameraPosition(cp));
+
+    print("Address-----------------1");
+
+    String address = await HelperMethods.findCordinateAddress(position);
+    print(address);
+
+    print("Address-----------------2");
   }
 
   static final CameraPosition _kGooglePlex = CameraPosition(
